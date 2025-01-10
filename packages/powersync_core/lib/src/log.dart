@@ -13,29 +13,13 @@ final Logger debugLogger = _makeDebugLogger();
 final Logger attachedLogger = Logger('PowerSync');
 
 Logger _makeDebugLogger() {
-  // Use a detached logger to log directly to the console
   final logger = Logger.detached('PowerSync');
-  logger.level = Level.FINE;
-  logger.onRecord.listen((record) {
-    print(
-        '[${record.loggerName}] ${record.level.name}: ${record.time}: ${record.message}');
-
-    if (record.error != null) {
-      print(record.error);
-    }
-    if (record.stackTrace != null) {
-      print(record.stackTrace);
-    }
-  });
+  logger.level = Level.OFF;
   return logger;
 }
 
 Logger _makeAutoLogger() {
-  if (kDebugMode) {
-    return _makeDebugLogger();
-  } else {
-    final logger = Logger.detached('PowerSync');
-    logger.level = Level.OFF;
-    return logger;
-  }
+  final logger = Logger.detached('PowerSync');
+  logger.level = Level.OFF;
+  return logger;
 }
